@@ -1,4 +1,9 @@
-pandas
-numpy
-python-binance
+fastapi
+uvicorn
+streamlit
 xgboost
+scikit-learn
+joblib
+numpy
+pandas
+python-binance
