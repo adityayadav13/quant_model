@@ -18,10 +18,7 @@ def health():
 @app.get("/market/price")
 def market_price():
     price = get_live_price()
-    return {
-        "symbol": "BTCUSDT",
-        "price": price
-    }
+    return {"symbol": "BTCUSDT", "price": price}
 
 @app.post("/agent/step")
 def run_model():
@@ -37,10 +34,11 @@ def run_model():
     label = classes[idx]
     confidence = float(probs[idx])
 
+    label_map = {0: "BUY", 2: "SELL", 3: "HOLD"}
+
+    side = label_map.get(label, "HOLD")
     if confidence < 0.6:
         side = "HOLD"
-    else:
-        side = {0: "BUY", 2: "SELL", 3: "HOLD"}[label]
 
     LAST_DECISION = {
         "side": side,
